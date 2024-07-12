@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.post('/', async (req, res) => {
     try {
-        const toDo = new model({
+        const toDo = new modelToDo({
             text: req.body.text
         })
         await toDo.save()
@@ -27,3 +27,6 @@ router.get('/', async (req, res) => {
         res.status(400).json({error: err.message})
     }
 })
+
+
+module.exports = router;
