@@ -18,6 +18,16 @@ db.once('open', () => {
 app.use(bodyParser.json());
 app.use(cors());
 
+
+app.get('/', (req, res) => {
+    try {
+        const welcome = 'Welcome to the site'
+        res.status(200).json(welcome)
+    } catch (error) {
+        res.status(400).json({err: error.message})
+    }
+})
+
 //Routes
 app.use('/api/todos', todoRoutes);
 app.listen(PORT, () => {
