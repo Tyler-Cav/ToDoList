@@ -7,12 +7,18 @@ const todoRoutes = require('./routes/todoRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://localhost:27017/todoapp');
+const connectDB = async () => {
+  try {
+    await mongoose.connect('mongodb://127.0.0.1:27017/todoapp');
+  } catch (error) {
+    handleError(error);
+  }
+}
+connectDB()
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
+mongoose.connection.on('connected', () => console.log('Connected to MongoDB'));
+mongoose.connection.on('error', err => {
+  logError(err);
 });
 
 app.use(bodyParser.json());
