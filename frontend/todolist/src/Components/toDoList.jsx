@@ -10,14 +10,18 @@ export default function TodoList() {
     useEffect(() => {
         fetchTodos();
         console.log('hi')
+
     }, [])
 
     const fetchTodos = async () => {
         const response = await axios.get('http://127.0.0.1:5000/api/todos')
         console.log(response.data)
+        setTodos(response.data)
     }
 
     return (
-        <h1>test</h1>
+    <></>
     )
 }
+
+
